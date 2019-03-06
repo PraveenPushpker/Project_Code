@@ -1,0 +1,20 @@
+2019-03-06 23:14:10.190  INFO 4644 --- [restartedMain] com.usa.ri.gov.ies.IesApplication        : Starting IesApplication on c-PC with PID 4644 (started by c in E:\New 2019\My Practice\Others\IES)
+2019-03-06 23:14:10.199  INFO 4644 --- [restartedMain] com.usa.ri.gov.ies.IesApplication        : The following profiles are active: dev
+2019-03-06 23:14:10.288  INFO 4644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-03-06 23:14:10.288  INFO 4644 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-03-06 23:14:12.275  INFO 4644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 7070 (http)
+2019-03-06 23:14:12.316  INFO 4644 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-03-06 23:14:12.317  INFO 4644 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.16]
+2019-03-06 23:14:12.330  INFO 4644 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jre1.8.0_181\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:/Program Files/Java/jre1.8.0_181/bin/client;C:/Program Files/Java/jre1.8.0_181/bin;C:/Program Files/Java/jre1.8.0_181/lib/i386;C:\Program Files\Common Files\Oracle\Java\javapath;C:\oraclexe\app\oracle\product\11.2.0\server\bin;;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Toshiba\Bluetooth Toshiba Stack\sys\;C:\Program Files\Skype\Phone\;C:\Program Files\VisualSVN Server\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\Java\jdk1.8.0_121\bin;E:\TCWIN45\BIN;E:\New 2019\MavenHome\apache-maven-3.5.3\bin;.;F:\Downnoad\Download\eclipse-jee-oxygen-2-win32;;.]
+2019-03-06 23:14:12.504  INFO 4644 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/IES]    : Initializing Spring embedded WebApplicationContext
+2019-03-06 23:14:12.504  INFO 4644 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2215 ms
+2019-03-06 23:14:12.586  INFO 4644 --- [restartedMain] c.u.r.g.i.a.c.WelcomeRestController      : WelcomeRestController::Intializied
+2019-03-06 23:14:12.876  INFO 4644 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-03-06 23:14:13.130  INFO 4644 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-03-06 23:14:13.222  INFO 4644 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 7070 (http) with context path '/IES'
+2019-03-06 23:14:13.227  INFO 4644 --- [restartedMain] com.usa.ri.gov.ies.IesApplication        : Started IesApplication in 4.06 seconds (JVM running for 5.298)
+2019-03-06 23:14:24.934  INFO 4644 --- [http-nio-7070-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/IES]    : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-03-06 23:14:24.935  INFO 4644 --- [http-nio-7070-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-03-06 23:14:24.948  INFO 4644 --- [http-nio-7070-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-03-06 23:14:24.992  INFO 4644 --- [http-nio-7070-exec-2] c.u.r.g.i.a.c.WelcomeRestController      : RestController::Welcome method Started
+2019-03-06 23:14:24.993  INFO 4644 --- [http-nio-7070-exec-2] c.u.r.g.i.a.c.WelcomeRestController      : RestController::Welcome method Ended

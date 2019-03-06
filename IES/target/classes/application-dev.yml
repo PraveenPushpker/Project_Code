@@ -1,0 +1,10 @@
+spring:
+  profiles:
+    active: dev
+    
+    server:
+    servlet:
+      context-path: /IES
+      
+logging:
+  file: IES-App-Logs

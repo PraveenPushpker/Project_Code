@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: dev
+    
+    
+ies:
+  properties:
+    message: WELCOME TO IES
+    db-url: jdbc:oracle:thin://localhost:1522/XE
+    db-pwd: ies@123
+    db-uname : ies-dev
+    db-driver-class: OracleDriver
+    success-msg: null
+    error-msg: null
+      
+server:
+  port: 7070
+  servlet:
+      context-path: /IES
+      
+            
+logging:
+  file: IES-App-Logs
