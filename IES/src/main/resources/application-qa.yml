@@ -1,3 +1,6 @@
-spring:
-  profiles:
-    active: qa
+ies:
+  properties:
+     message: WELCOME TO IES-QA
+       
+server:
+  port: 7070

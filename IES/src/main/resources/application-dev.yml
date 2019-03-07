@@ -1,10 +1,29 @@
+ies:
+  properties:
+     message: WELCOME TO IES-DEV    
+server:
+  port: 7070
+   
+#DB PROPERTIES
 spring:
-  profiles:
-    active: dev
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        ddl-auto: update
+        formate_sql: true
+        dialect: org.hibernate.dialect.Oracle10gDialect
+  
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/XE
+    username: IES_DEV
+    password: IES_DEV
+    driver-class-name: oracle.jdbc.driver.OracleDriver
     
-    server:
-    servlet:
-      context-path: /IES
-      
+#LOGGING PROPERTIES      
 logging:
   file: IES-App-Logs
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    com.usa.ri.gov.ies: DEBUG
