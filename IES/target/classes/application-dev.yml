@@ -1,29 +1,47 @@
 ies:
   properties:
-     message: WELCOME TO IES-DEV    
+    message: Welcome to IES - DEV
+    cwRegSuccess: Registration Successfull
+    cwRegFail: Registration Failed
+    regEmailFileName: Registration_Email_Template.txt
+    regEmailSubject: IES Registration Completed
+    accActivateEmailFileName: Account_Active_Email_Template.txt
+    accActivateEmailSubject: Your RI IES Account Activated
+    accDeActiveEmailFileName: Account_De_Active_Email_Template.txt
+    accDeActiveEmailSubject: Your RI IES Account De-Activated
+    accActivateSuccMsg: Account Activated Successfully
+    accActivateErrMsg: Account Activation Failed
+    accDeActivateSuccMsg: Account De-Activated Successfully
+    accDeActivateErrMsg: Account De-Activation Failed
 server:
   port: 7070
-   
-#DB PROPERTIES
 spring:
   jpa:
+    hibernate:
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true
-        ddl-auto: update
-        formate_sql: true
-        dialect: org.hibernate.dialect.Oracle10gDialect
-  
+        format_sql: true
+        dialect: org.hibernate.dialect.OracleDialect
   datasource:
-    url: jdbc:oracle:thin:@localhost:1521/XE
+    url: jdbc:oracle:thin:@localhost:1521/xe
     username: IES_DEV
     password: IES_DEV
     driver-class-name: oracle.jdbc.driver.OracleDriver
-    
-#LOGGING PROPERTIES      
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: JavaProject.02.7am@gmail.com
+    password: JavaProject@123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 logging:
-  file: IES-App-Logs
+  file: IES-App.log
   level:
-    root: ERROR
-    org.springframework.web: ERROR
+    root: INFO
     com.usa.ri.gov.ies: DEBUG

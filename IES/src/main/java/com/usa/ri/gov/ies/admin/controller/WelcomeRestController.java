@@ -1,6 +1,5 @@
 package com.usa.ri.gov.ies.admin.controller;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +11,21 @@ import com.usa.ri.gov.ies.properties.AppProperties;
 
 @RestController
 public class WelcomeRestController {
-
-	private static Logger logger= LoggerFactory.getLogger(WelcomeRestController.class);
+	private static Logger logger = LoggerFactory.getLogger(WelcomeRestController.class);
 
 	public WelcomeRestController() {
-		logger.info("WelcomeRestController::Intializied");
+		logger.info("WelcomeRestController::Intialized");
 	}
 
-	@Autowired(required = true)
+	@Autowired
 	private AppProperties properties;
 
 	@GetMapping("/welcome")
-	public String welcome() 
-	{
-		logger.info("RestController::Welcome method Started");
+	public String welcome() {
+		logger.info("WelcomeRestController::welcome method started");
 		System.out.println(properties);
 		String msg = properties.getProperties().get(AppConstants.MESSAGE);
-		logger.info("RestController::Welcome method Ended");
+		logger.info("WelcomeRestController::welcome method ended");
 		return msg;
 	}
-
 }

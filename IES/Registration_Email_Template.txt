@@ -1,0 +1,22 @@
+Hello USER_NAME,<br/>
+
+<br/>
+
+Greetings for the day..!! <br/>
+
+<br/>
+
+Your Account is created by RI IES Application Administrator. You can access the application using below details. <br/>
+
+<br/>
+
+Application : APP_URL <br/>
+Username : APP_USER_EMAIL <br/></br/>
+Password : APP_USER_PWD <br/> <br/>
+
+<br/>
+
+For any questions please contact Administrator using +1-844 477 7899. <br/>
+
+Thanks & Regards,<br/>
+IES Team.<br/>

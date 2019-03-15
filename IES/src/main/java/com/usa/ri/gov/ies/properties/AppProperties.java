@@ -12,21 +12,19 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "ies")
 public class AppProperties {
 
-	private Map<String, String> properties = new HashMap<>();
+	private Map<String, String> properties = new HashMap<String, String>();
 
 	public Map<String, String> getProperties() {
 		return properties;
 	}
 
-	public void setProperies(Map<String, String> properties) {
+	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
 
 	@Override
 	public String toString() {
-		return "AppProperties [properies=" + properties + "]";
+		return "AppProperties [properties=" + properties + "]";
 	}
-	
-	
-	
+
 }
