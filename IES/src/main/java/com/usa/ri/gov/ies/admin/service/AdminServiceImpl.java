@@ -275,4 +275,10 @@ public class AdminServiceImpl implements AdminService {
 		logger.info("AdminServiceImpl::registerAccount() completed");
 		return (entity.getPlanId() > 0) ? true : false;
 	}//method
+
+	@Override
+	public String findByPlanName(String planId) {
+		CreatePlanEntity entity = ctrPlnRepository.findByPlanName(planId);
+		return (entity == null) ? "Unique" : "Duplicate";
+	}
 }//class

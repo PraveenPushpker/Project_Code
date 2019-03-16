@@ -254,5 +254,12 @@ public class AdminController {
 		}
 		return "crtPlan";
 	}
+	
+	
+	@RequestMapping("/crtPlan/validatePlanName")
+	public @ResponseBody String checkPlanNameValidate(HttpServletRequest req, Model model) {
+		String planId = req.getParameter("planName");
+		return adminService.findByPlanName(planId);
+	}
 
 }

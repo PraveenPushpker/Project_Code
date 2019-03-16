@@ -16,4 +16,6 @@ public interface AdminService {
 	public boolean updateAccountSw(String accId,String activeSw);
 	
 	public boolean registerPlan(CreatePlan createPlan);
+	
+	public String findByPlanName(String planId);
 }
