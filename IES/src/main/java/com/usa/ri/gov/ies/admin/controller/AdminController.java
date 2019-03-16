@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.usa.ri.gov.ies.admin.model.AppAccount;
-import com.usa.ri.gov.ies.admin.model.CreatePlan;
+import com.usa.ri.gov.ies.admin.model.IesPlan;
 import com.usa.ri.gov.ies.admin.service.AdminService;
 import com.usa.ri.gov.ies.constants.AppConstants;
 import com.usa.ri.gov.ies.properties.AppProperties;
@@ -213,50 +213,50 @@ public class AdminController {
 	}
 	
 	
-	@RequestMapping(value = "/crtPlan", method = RequestMethod.GET)
-	public String plnDtlsForm(Model model) {
-		logger.debug("AdminController::crtPlanForm() started");
+	@RequestMapping(value = "/iesPlan", method = RequestMethod.GET)
+	public String iesPlanForm(Model model) {
+		logger.debug("AdminController::iesPlanForm() started");
 		// Creating empty model object
-		CreatePlan crtModel = new CreatePlan();
+		IesPlan iesModel = new IesPlan();
 
 		// add cwModel object to Model scope
-		model.addAttribute("crtModel", crtModel);
+		model.addAttribute("iesModel", iesModel);
 
 		initForm(model);
 
-		logger.debug("AdminController::crtPlanForm() ended");
-		logger.info("Create Plan Form loaded Successfully");
+		logger.debug("AdminController::iesPlanForm() ended");
+		logger.info("IES Plan Form loaded Successfully");
 
-		return "crtPlan";
+		return "iesPlan";
 	}
 	
-	@RequestMapping(value = "/crtPlan", method = RequestMethod.POST)
-	public String plnDtls(@ModelAttribute("crtModel") CreatePlan createPlanModal, Model model) {
+	@RequestMapping(value = "/iesPlan", method = RequestMethod.POST)
+	public String plnDtls(@ModelAttribute("iesModel") IesPlan iesplnModal, Model model) {
 		try {
-			logger.debug("Create Plan creation started");
+			logger.debug("IES Plan creation started");
 
 			// call Service layer method
-			boolean isSaved = adminService.registerPlan(createPlanModal);
+			boolean isSaved = adminService.registerPlan(iesplnModal);
 
 			Map<String, String> map = appProperties.getProperties();
 			if (isSaved) {
 				// Display success message
-				model.addAttribute(AppConstants.SUCCESS, map.get(AppConstants.CW_REG_SUCCESS));
+				model.addAttribute(AppConstants.SUCCESS, map.get(AppConstants.CP_REG_SUCCESS));
 			} else {
 				// Display failure message
-				model.addAttribute(AppConstants.FAILURE, map.get(AppConstants.CW_REG_FAIL));
+				model.addAttribute(AppConstants.FAILURE, map.get(AppConstants.CP_REG_FAIL));
 			}
 			initForm(model);
-			logger.debug("user account creation ended");
-			logger.info("User Account creation completed successfully");
+			logger.debug("IES Plan creation ended");
+			logger.info("IES Plan creation completed successfully");
 		} catch (Exception e) {
-			logger.error("User Account Creation Failed :: " + e.getMessage());
+			logger.error("IES Plan creation Failed :: " + e.getMessage());
 		}
-		return "crtPlan";
+		return "iesPlan";
 	}
 	
 	
-	@RequestMapping("/crtPlan/validatePlanName")
+	@RequestMapping("/iesPlan/validatePlanName")
 	public @ResponseBody String checkPlanNameValidate(HttpServletRequest req, Model model) {
 		String planId = req.getParameter("planName");
 		return adminService.findByPlanName(planId);

@@ -13,11 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.usa.ri.gov.ies.admin.entity.AppAccountEntity;
-import com.usa.ri.gov.ies.admin.entity.CreatePlanEntity;
+import com.usa.ri.gov.ies.admin.entity.IesPlanEntity;
 import com.usa.ri.gov.ies.admin.model.AppAccount;
-import com.usa.ri.gov.ies.admin.model.CreatePlan;
+import com.usa.ri.gov.ies.admin.model.IesPlan;
 import com.usa.ri.gov.ies.admin.repository.AppAccountRepository;
-import com.usa.ri.gov.ies.admin.repository.CreatePlanRepository;
+import com.usa.ri.gov.ies.admin.repository.IesPlanRepository;
 import com.usa.ri.gov.ies.constants.AppConstants;
 import com.usa.ri.gov.ies.properties.AppProperties;
 import com.usa.ri.gov.ies.util.EmailUtils;
@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
 	private AppAccountRepository appAccRepository;
 	
 	@Autowired(required = true)
-	private CreatePlanRepository ctrPlnRepository;
+	private IesPlanRepository iesPlnRepository;
 
 	@Autowired(required = true)
 	private EmailUtils emailUtils;
@@ -258,18 +258,18 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public boolean registerPlan(CreatePlan createPlan) {
+	public boolean registerPlan(IesPlan createPlan) {
 		logger.debug("Create Plan started");
 
 		// Convert model data to Entity data
-		CreatePlanEntity entity = new CreatePlanEntity();
+		IesPlanEntity entity = new IesPlanEntity();
 		BeanUtils.copyProperties(createPlan, entity);
 
 		// set Status as Active
 		entity.setActiveSw(AppConstants.ACTIVE_SW);
 
 		// Call Repository method
-		entity = ctrPlnRepository.save(entity);
+		entity = iesPlnRepository.save(entity);
 
 		logger.debug("User Registration completed");
 		logger.info("AdminServiceImpl::registerAccount() completed");
@@ -278,7 +278,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String findByPlanName(String planId) {
-		CreatePlanEntity entity = ctrPlnRepository.findByPlanName(planId);
+		IesPlanEntity entity = iesPlnRepository.findByPlanName(planId);
 		return (entity == null) ? "Unique" : "Duplicate";
 	}
 }//class

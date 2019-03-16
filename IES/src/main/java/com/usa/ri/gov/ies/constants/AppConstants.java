@@ -32,5 +32,8 @@ public class AppConstants {
 	
 	public static final String ACC_DE_ACTIVATE_SUCC_MSG="accDeActivateSuccMsg";
 	public static final String ACC_DE_ACTIVATE_ERR_MSG="accDeActivateErrMsg";
+	
+	public static final String CP_REG_SUCCESS = "cpRegSuccess";
+	public static final String CP_REG_FAIL = "cpRegFail";
 
 }

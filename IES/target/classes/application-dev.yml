@@ -1,8 +1,8 @@
 ies:
   properties:
     message: Welcome to IES - DEV
-    cwRegSuccess: Registration Successfull
-    cwRegFail: Registration Failed
+    cwRegSuccess: Registration Successfull!!!
+    cwRegFail: Registration Failed!!!
     regEmailFileName: Registration_Email_Template.txt
     regEmailSubject: IES Registration Completed
     accActivateEmailFileName: Account_Active_Email_Template.txt
@@ -13,6 +13,8 @@ ies:
     accActivateErrMsg: Account Activation Failed
     accDeActivateSuccMsg: Account De-Activated Successfully
     accDeActivateErrMsg: Account De-Activation Failed
+    cpRegSuccess: Create Plan Registration Successfully!!!
+    cpRegFail: Create Plan Registration Failed!!!
 server:
   port: 7070
 spring:
