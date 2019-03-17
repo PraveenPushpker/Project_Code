@@ -13,7 +13,7 @@ ies:
     accActivateErrMsg: Account Activation Failed
     accDeActivateSuccMsg: Account De-Activated Successfully
     accDeActivateErrMsg: Account De-Activation Failed
-    cpRegSuccess: Create Plan Registration Successfully!!!
+    cpRegSuccess: Create Plan Successfully!!!
     cpRegFail: Create Plan Registration Failed!!!
 server:
   port: 7070

@@ -18,4 +18,6 @@ public interface AdminService {
 	public boolean registerPlan(IesPlan createPlan);
 	
 	public String findByPlanName(String planId);
+	
+	public List<IesPlan> findAllIesPlans();
 }

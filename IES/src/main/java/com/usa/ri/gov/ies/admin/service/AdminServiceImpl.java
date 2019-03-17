@@ -275,10 +275,40 @@ public class AdminServiceImpl implements AdminService {
 		logger.info("AdminServiceImpl::registerAccount() completed");
 		return (entity.getPlanId() > 0) ? true : false;
 	}//method
+	
+	
 
 	@Override
 	public String findByPlanName(String planId) {
 		IesPlanEntity entity = iesPlnRepository.findByPlanName(planId);
 		return (entity == null) ? "Unique" : "Duplicate";
+	}
+	
+	
+
+	@Override
+	public List<IesPlan> findAllIesPlans() {
+		logger.debug("findAllIesPlans() method started");
+		List<IesPlan> models = new ArrayList<IesPlan>();
+		try {
+			// call Repository method
+			List<IesPlanEntity> entities = iesPlnRepository.findAll();
+
+			if (entities.isEmpty()) {
+				logger.warn("***No Plans found in Application****");
+			} else {
+				// convert Entities to models
+				for (IesPlanEntity entity : entities) {
+					IesPlan model = new IesPlan();
+					BeanUtils.copyProperties(entity, model);
+					models.add(model);
+				}
+				logger.info("All Plans details loaded successfully");
+			}
+		} catch (Exception e) {
+			logger.error("Exception occured in findAllIesPlans()::" + e.getMessage());
+		}
+		logger.debug("findAllIesPlans() method ended");
+		return models;
 	}
 }//class

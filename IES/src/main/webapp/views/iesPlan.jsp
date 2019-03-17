@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" isELIgnored="false"%>
-	
-	<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-	
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,68 +21,68 @@
 <script
 	src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 <script>
-$(function() {
+	$(function() {
 
-	$('form[id="iesplanForm"]').validate({
-		rules : {
-			planName : 'required',
-			planDesc : 'required',
-			startDate : 'required',
-			endDate : 'required'
-		},
-		messages : {
-			planName : 'Please enter Plan Name',
-			planDesc : 'Please enter Description of Plan',
-			startDate : 'Please select psd',
-			endDate : 'Please select ped'
-		},
-		submitHandler : function(form) {
-			form.submit();
-		}
-	});
-	
-	
-	
-	$("#planName").blur(function() {
-		var enteredPlanName = $("#planName").val();
-		$.ajax({
-			url : window.location + "/validatePlanName",
-			data : "planName=" + enteredPlanName,
-			success : function(result) {
-				if (result == 'Duplicate') {
-					$("#planNameMsg").html("Plan already registered.!!");
-					$("#planName").focus();
-				} else {
-					$("#planNameMsg").html("");
-				}
-
+		$('form[id="iesplanForm"]').validate({
+			rules : {
+				planName : 'required',
+				planDesc : 'required',
+				startDate : 'required',
+				endDate : 'required'
+			},
+			messages : {
+				planName : 'Please enter Plan Name',
+				planDesc : 'Please enter Description of Plan',
+				startDate : 'Please select psd',
+				endDate : 'Please select ped'
+			},
+			submitHandler : function(form) {
+				form.submit();
 			}
 		});
 
+		$("#planName").blur(function() {
+			var enteredPlanName = $("#planName").val();
+			$.ajax({
+				url : window.location + "/validatePlanName",
+				data : "planName=" + enteredPlanName,
+				success : function(result) {
+					if (result == 'Duplicate') {
+						$("#planNameMsg").html("Plan already registered.!!");
+						$("#planName").focus();
+						$("#createPlnBtn").attr("disabled", true);
+					} else {
+						$("#planNameMsg").html("");
+						$("#createPlnBtn").attr("disabled", false);
+					}
 
-	    $("#datepicker").datepicker({
-	        numberOfMonths: 1,
-	        onSelect: function (selected) {
-	            var dt = new Date(selected);
-	            dt.setDate(dt.getDate());
-	            $("#datepicker1").datepicker("option", "minDate", dt);
-	        }
-	    });
-	    $("#datepicker1").datepicker({
-	        numberOfMonths: 1,
-	        onSelect: function (selected) {
-	            var dt = new Date(selected);
-	            dt.setDate(dt.getDate());
-	            $("#datepicker").datepicker("option", "maxDate", dt);
-	        }
-	    });
+				}
+			});
+
+			$("#datepicker").datepicker({
+				numberOfMonths : 1,
+				onSelect : function(selected) {
+					var dt = new Date(selected);
+					dt.setDate(dt.getDate());
+					$("#datepicker1").datepicker("option", "minDate", dt);
+				}
+			});
+			$("#datepicker1").datepicker({
+				numberOfMonths : 1,
+				onSelect : function(selected) {
+					var dt = new Date(selected);
+					dt.setDate(dt.getDate());
+					$("#datepicker").datepicker("option", "maxDate", dt);
+				}
+			});
+
+		});
 	});
-});
-	
 </script>
 </head>
-<%@ include file="header-inner.jsp" %>
+<%@ include file="header-inner.jsp"%>
 <body>
+
 
 	<font color='green'>${success}</font>
 	<font color='red'>${failure}</font>
@@ -109,7 +109,9 @@ $(function() {
 				<td><form:input path="endDate" id="datepicker1" /></td>
 			</tr>
 			<tr>
-				<td><input type="Submit" value="Create Plan" /></td>
+				
+				<td><input type="reset" value="Reset" /></td>
+				<td><input type="Submit" value="Create Plan" id="createPlnBtn" /></td>
 			</tr>
 
 		</table>

@@ -261,5 +261,20 @@ public class AdminController {
 		String planId = req.getParameter("planName");
 		return adminService.findByPlanName(planId);
 	}
+	
+	
+	@RequestMapping(value = "/viewIesPlans")
+	public String viewIesPlans(Model model) {
+		logger.debug("viewIesPlans() method started");
+
+		// calling service layer method
+		List<IesPlan> accounts = adminService.findAllIesPlans();
+
+		// store accounts in model scope
+		model.addAttribute(AppConstants.APP_ACCOUNTS, accounts);
+
+		logger.debug("viewIesPlans() method ended");
+		return "viewIesPlans"; // view name
+	}
 
 }
