@@ -123,6 +123,20 @@ public class AdminController {
 		String emailId = req.getParameter("email");
 		return adminService.findByEmail(emailId);
 	}
+	
+	
+	@RequestMapping(value = "/editAcc")
+	public String editAccount(HttpServletRequest req, Model model) {
+
+		String accId = req.getParameter("accId");
+
+		AppAccount accModel = adminService.findByAccountId(accId);
+
+		model.addAttribute(AppConstants.APP_ACCOUNT, accModel);
+		initForm(model);
+		return "editAcc";
+}
+	
 
 	/**
 	 * This method is used to display all app accounts in table
@@ -276,5 +290,71 @@ public class AdminController {
 		logger.debug("viewIesPlans() method ended");
 		return "viewIesPlans"; // view name
 	}
+	
+	
+	
+	
+	@RequestMapping(value = "/iesPlndelete")
+	public String deleteIesPlan(HttpServletRequest req, Model model) {
+		logger.info("*** IesPlan Getting De-Activating ***");
+		logger.debug("***deleteIesPlan() started***");
+
+		// capture query param value
+		String planId = req.getParameter("planId");
+
+		// call service layer method
+		boolean isDeleted = adminService.updatePlanSw(planId, AppConstants.IN_ACTIVE_SW);
+		logger.debug("***deleteIesPlan() ended***");
+
+		// calling service layer method
+		List<IesPlan> accounts = adminService.findAllIesPlans();
+
+		// store accounts in model scope
+		model.addAttribute(AppConstants.APP_ACCOUNTS, accounts);
+
+		if (isDeleted) {
+			String succMsg = appProperties.getProperties().get(AppConstants.PLN_DE_ACTIVATE_SUCC_MSG);
+			model.addAttribute(AppConstants.SUCCESS, succMsg);
+		} else {
+			String errMsg = appProperties.getProperties().get(AppConstants.PLN_DE_ACTIVATE_ERR_MSG);
+			model.addAttribute(AppConstants.FAILURE, errMsg);
+		}
+		return "viewIesPlans";
+	}
+
+	/**
+	 * This method is used to perform Soft Delete
+	 * 
+	 * @param req
+	 * @param model
+	 * @return String
+	 */
+	@RequestMapping(value = "/iesPlnActivate")
+	public String activateIesPlan(HttpServletRequest req, Model model) {
+		logger.debug("***activateIesPlan() started***");
+		logger.info("*** IesPlan Getting Activating ***");
+		// capture query param value
+		String planId = req.getParameter("planId");
+
+		// call service layer method
+		boolean isActivated = adminService.updatePlanSw(planId, AppConstants.ACTIVE_SW);
+		logger.debug("***activateIesPlan() ended***");
+
+		// calling service layer method
+		List<IesPlan> accounts = adminService.findAllIesPlans();
+
+		// store accounts in model scope
+		model.addAttribute(AppConstants.APP_ACCOUNTS, accounts);
+
+		if (isActivated) {
+			String succMsg = appProperties.getProperties().get(AppConstants.PLN_ACTIVATE_SUCC_MSG);
+			model.addAttribute(AppConstants.SUCCESS, succMsg);
+		} else {
+			String errMsg = appProperties.getProperties().get(AppConstants.PLN_ACTIVATE_ERR_MSG);
+			model.addAttribute(AppConstants.FAILURE, errMsg);
+		}
+		return "viewIesPlans";
+	}
+	
 
 }

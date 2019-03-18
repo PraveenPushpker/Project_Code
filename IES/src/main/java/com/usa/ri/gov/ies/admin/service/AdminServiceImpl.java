@@ -311,4 +311,47 @@ public class AdminServiceImpl implements AdminService {
 		logger.debug("findAllIesPlans() method ended");
 		return models;
 	}
+	
+	
+	@Override
+	public boolean updatePlanSw(String planId, String activeSw) {
+		logger.debug("*** updatePlanSw() method started");
+		try {
+			// load existing record using accId
+			IesPlanEntity entity = iesPlnRepository.findById(Integer.parseInt(planId)).get();
+			if (entity != null) {
+				// Setting Account Active Sw (Y|N)
+				entity.setActiveSw(activeSw);
+				// Updating Account
+				iesPlnRepository.save(entity);
+				logger.debug("*** updatePlanSw() method ended");
+
+				IesPlan plnModel = new IesPlan();
+				BeanUtils.copyProperties(entity, plnModel);
+
+			}
+			return true;
+		} catch (Exception e) {
+			logger.error("Exception occured in updatePlanSw() method : " + e.getMessage());
+		}
+		return false;
+	}//method
+	
+	
+	
+	
+	@Override
+	public AppAccount findByAccountId(String accId) {
+		AppAccountEntity entity = appAccRepository.findById(Integer.parseInt(accId)).get();
+		
+		AppAccount model = new AppAccount();
+		
+		BeanUtils.copyProperties(entity, model);
+		
+		String decryptedPwd = PasswordUtils.decrypt(model.getPassword());
+		
+		model.setPassword(decryptedPwd);
+		
+		return model;
+}
 }//class

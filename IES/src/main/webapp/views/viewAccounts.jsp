@@ -59,7 +59,7 @@
 					<td><c:out value="${acc.email}" /></td>
 					<td><c:out value="${acc.role}" /></td>
 
-					<td><a href="#">Edit</a> <c:if test="${acc.activeSw =='Y' }">
+					<td><a href="editAcc?accId=${acc.accId}">Edit</a> <c:if test="${acc.activeSw =='Y' }">
 							<a href="delete?accId=${acc.accId}"
 								onclick="return confirmDelete()">Delete</a>
 						</c:if> <c:if test="${acc.activeSw =='N' }">

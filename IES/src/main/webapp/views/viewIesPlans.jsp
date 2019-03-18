@@ -60,10 +60,10 @@
 					<td><c:out value="${pln.endDate}" /></td>
 
 					<td><a href="#">Edit</a> <c:if test="${pln.activeSw =='Y' }">
-							<a href="delete?planId=${pln.planId}"
+							<a href="iesPlndelete?planId=${pln.planId}"
 								onclick="return confirmDelete()">Delete</a>
 						</c:if> <c:if test="${pln.activeSw =='N' }">
-							<a href="activate?planId=${pln.planId}"
+							<a href="iesPlnActivate?planId=${pln.planId}"
 								onclick="return confirmActivate()">Activate</a>
 						</c:if></td>
 				</tr>

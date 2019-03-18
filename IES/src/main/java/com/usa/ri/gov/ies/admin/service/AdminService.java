@@ -15,9 +15,13 @@ public interface AdminService {
 	
 	public boolean updateAccountSw(String accId,String activeSw);
 	
+	public AppAccount findByAccountId(String accId);
+	
 	public boolean registerPlan(IesPlan createPlan);
 	
 	public String findByPlanName(String planId);
 	
 	public List<IesPlan> findAllIesPlans();
+	
+	public boolean updatePlanSw(String planId,String activeSw);
 }

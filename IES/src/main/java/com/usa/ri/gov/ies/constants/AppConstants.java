@@ -21,6 +21,7 @@ public class AppConstants {
 	public static final String REG_EMAIL_SUBJECT="regEmailSubject";
 
 	public static final String APP_ACCOUNTS="accounts";
+	public static final String APP_ACCOUNT="account";
 
 	public static final String ACTIVATE_EMAIL_FILE="accActivateEmailFileName";
 	public static final String DE_ACTIVATE_EMAIL_FILE="accDeActiveEmailFileName";
@@ -35,5 +36,11 @@ public class AppConstants {
 	
 	public static final String CP_REG_SUCCESS = "cpRegSuccess";
 	public static final String CP_REG_FAIL = "cpRegFail";
+	
+	public static final String PLN_ACTIVATE_SUCC_MSG="plnActivateSuccMsg";
+	public static final String PLN_ACTIVATE_ERR_MSG="plnActivateErrMsg";
+	
+	public static final String PLN_DE_ACTIVATE_SUCC_MSG="plnDeActivateSuccMsg";
+	public static final String PLN_DE_ACTIVATE_ERR_MSG="plnDeActivateErrMsg";
 
 }

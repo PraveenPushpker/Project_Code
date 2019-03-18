@@ -15,6 +15,10 @@ ies:
     accDeActivateErrMsg: Account De-Activation Failed
     cpRegSuccess: Create Plan Successfully!!!
     cpRegFail: Create Plan Registration Failed!!!
+    plnDeActivateSuccMsg: Plan De-Activated Successfully
+    plnDeActivateErrMsg: Plan De-Activation Failed
+    plnActivateSuccMsg: Plan Activated Successfully
+    plnActivateErrMsg: Plan Activation Failed
 server:
   port: 7070
 spring:
