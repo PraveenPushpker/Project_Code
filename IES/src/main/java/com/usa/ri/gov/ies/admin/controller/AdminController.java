@@ -356,5 +356,20 @@ public class AdminController {
 		return "viewIesPlans";
 	}
 	
+	
+	
+	
+	@RequestMapping(value = "/editIesPln")
+	public String editPlan(HttpServletRequest req, Model model) {
+
+		String planId = req.getParameter("planId");
+
+		IesPlan accModel = adminService.findByPlanId(planId);
+
+		model.addAttribute(AppConstants.APP_ACCOUNT, accModel);
+		initForm(model);
+		return "editIesPln";
+}
+	
 
 }

@@ -36,7 +36,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Autowired(required = true)
 	private AppAccountRepository appAccRepository;
-	
+
 	@Autowired(required = true)
 	private IesPlanRepository iesPlnRepository;
 
@@ -167,7 +167,7 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean updateAccountSw(String accId, String activeSw) {
 		logger.debug("*** updateAccountSw() method started");
-		String fileName=null,mailSub=null,mailBody=null,password=null;
+		String fileName = null, mailSub = null, mailBody = null, password = null;
 		try {
 			// load existing record using accId
 			AppAccountEntity entity = appAccRepository.findById(Integer.parseInt(accId)).get();
@@ -185,24 +185,24 @@ public class AdminServiceImpl implements AdminService {
 				if (activeSw.equals("Y")) {
 					// send Email saying account activated
 					try {
-						//get file name
+						// get file name
 						fileName = appProperties.getProperties().get(AppConstants.ACTIVATE_EMAIL_FILE);
-						//get mail subject
+						// get mail subject
 						mailSub = appProperties.getProperties().get(AppConstants.ACTIVATE_EMAIL_SUB);
-						//decrypt the password
-						password=PasswordUtils.decrypt(accModel.getPassword());
-						//set decrypted password to accModel object password field
+						// decrypt the password
+						password = PasswordUtils.decrypt(accModel.getPassword());
+						// set decrypted password to accModel object password field
 						accModel.setPassword(password);
-						//get email body
+						// get email body
 						mailBody = getEmailBodyContent(accModel, fileName);
-						//send email to activate registered cw/admin
+						// send email to activate registered cw/admin
 						emailUtils.sendEmail(entity.getEmail(), mailSub, mailBody);
 					} catch (Exception e) {
 						logger.error("Email Sending is failed : " + e.getMessage());
 					}
 					return true;
 				} else {
-					
+
 					try {
 						// send Email saying account de-activated
 						// send account de-activation mail to registered case worker/admin
@@ -211,33 +211,35 @@ public class AdminServiceImpl implements AdminService {
 						// get email subject
 						mailSub = appProperties.getProperties().get(AppConstants.DE_ACTIVATE_EMAIL_SUB);
 						// get email body content
-						mailBody = getDeActivateAccountEmailBodyContent(fileName,accModel);
+						mailBody = getDeActivateAccountEmailBodyContent(fileName, accModel);
 						// send email to registered cw/admin
-						emailUtils.sendEmail(entity.getEmail(),mailSub,mailBody);
-					}catch(Exception e) {
+						emailUtils.sendEmail(entity.getEmail(), mailSub, mailBody);
+					} catch (Exception e) {
 						logger.error("Email Sending is failed : " + e.getMessage());
 					}
 					return true;
-				}				
+				}
 			}
 		} catch (Exception e) {
 			logger.error("Exception occured in updateAccountSw() method : " + e.getMessage());
 		}
 		return false;
-	}//method
+	}// method
+
 	/**
 	 * This method is used to get inactive account email body content from file
+	 * 
 	 * @param fileName
 	 * @param cwModel
 	 * @return body
 	 * @throws IOException
 	 */
-	public String getDeActivateAccountEmailBodyContent(String fileName,AppAccount accModel) throws IOException {
-		//create BufferReader object
+	public String getDeActivateAccountEmailBodyContent(String fileName, AppAccount accModel) throws IOException {
+		// create BufferReader object
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
-		//create StringBuffer object
+		// create StringBuffer object
 		StringBuffer body = new StringBuffer();
-		//read the line from the text file
+		// read the line from the text file
 		String line = br.readLine();
 		while (line != null) {
 			if (line != null && !"".equals(line) && !"<br/>".equals(line)) {
@@ -250,7 +252,7 @@ public class AdminServiceImpl implements AdminService {
 			}
 			// read next line
 			line = br.readLine();
-			
+
 		}
 		// close/release br object
 		br.close();
@@ -274,17 +276,13 @@ public class AdminServiceImpl implements AdminService {
 		logger.debug("User Registration completed");
 		logger.info("AdminServiceImpl::registerAccount() completed");
 		return (entity.getPlanId() > 0) ? true : false;
-	}//method
-	
-	
+	}// method
 
 	@Override
 	public String findByPlanName(String planId) {
 		IesPlanEntity entity = iesPlnRepository.findByPlanName(planId);
 		return (entity == null) ? "Unique" : "Duplicate";
 	}
-	
-	
 
 	@Override
 	public List<IesPlan> findAllIesPlans() {
@@ -311,8 +309,7 @@ public class AdminServiceImpl implements AdminService {
 		logger.debug("findAllIesPlans() method ended");
 		return models;
 	}
-	
-	
+
 	@Override
 	public boolean updatePlanSw(String planId, String activeSw) {
 		logger.debug("*** updatePlanSw() method started");
@@ -335,23 +332,32 @@ public class AdminServiceImpl implements AdminService {
 			logger.error("Exception occured in updatePlanSw() method : " + e.getMessage());
 		}
 		return false;
-	}//method
-	
-	
-	
-	
+	}// method
+
 	@Override
 	public AppAccount findByAccountId(String accId) {
 		AppAccountEntity entity = appAccRepository.findById(Integer.parseInt(accId)).get();
-		
+
 		AppAccount model = new AppAccount();
-		
+
 		BeanUtils.copyProperties(entity, model);
-		
+
 		String decryptedPwd = PasswordUtils.decrypt(model.getPassword());
-		
+
 		model.setPassword(decryptedPwd);
-		
+
 		return model;
-}
-}//class
+	}
+
+	@Override
+	public IesPlan findByPlanId(String planId) {
+		IesPlanEntity entity = iesPlnRepository.findById(Integer.parseInt(planId)).get();
+
+		IesPlan model = new IesPlan();
+
+		BeanUtils.copyProperties(entity, model);
+
+		return model;
+	}
+
+}// class

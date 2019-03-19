@@ -42,5 +42,7 @@ public class AppConstants {
 	
 	public static final String PLN_DE_ACTIVATE_SUCC_MSG="plnDeActivateSuccMsg";
 	public static final String PLN_DE_ACTIVATE_ERR_MSG="plnDeActivateErrMsg";
+	
+	public static final String PLN_ACCOUNT="account";
 
 }

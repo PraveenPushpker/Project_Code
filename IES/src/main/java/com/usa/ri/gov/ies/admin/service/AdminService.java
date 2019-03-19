@@ -24,4 +24,6 @@ public interface AdminService {
 	public List<IesPlan> findAllIesPlans();
 	
 	public boolean updatePlanSw(String planId,String activeSw);
+	
+	public IesPlan findByPlanId(String planId);
 }
