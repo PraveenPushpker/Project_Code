@@ -43,6 +43,14 @@ public class AppConstants {
 	public static final String PLN_DE_ACTIVATE_SUCC_MSG="plnDeActivateSuccMsg";
 	public static final String PLN_DE_ACTIVATE_ERR_MSG="plnDeActivateErrMsg";
 	
+	public static final String PLAN_UPDATED_SUCCESS_MSG = "planUpdatedSuccessMsg";	
+	public static final String PLAN_UPDATED_ERROR_MSG = "planUpdatedErrorMsg";	
+	
 	public static final String PLN_ACCOUNT="account";
+	
+	public static final String UPDATE_ACC_EMAIL_FILE_NAME = "updateAccEmailFileName";
+	public static final String ACCOUNT_UPDATE_SUBJECT = "updateAccEmailSubject";
+	public static final String EDIT_ACC_SUCCESS_MSG="editAccSuccessMsg";
+	public static final String EDIT_ACC_ERR_MSG="editAccFailureMsg";
 
 }

@@ -59,7 +59,7 @@
 					<td><c:out value="${pln.startDate}" /></td>
 					<td><c:out value="${pln.endDate}" /></td>
 
-					<td><a href="editIesPln?planId=${pln.planId}">Edit</a> <c:if test="${pln.activeSw =='Y' }">
+					<td><a href="editPlan?planId=${pln.planId}">Edit</a> <c:if test="${pln.activeSw =='Y' }">
 							<a href="iesPlndelete?planId=${pln.planId}"
 								onclick="return confirmDelete()">Delete</a>
 						</c:if> <c:if test="${pln.activeSw =='N' }">

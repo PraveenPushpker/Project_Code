@@ -19,6 +19,12 @@ ies:
     plnDeActivateErrMsg: Plan De-Activation Failed
     plnActivateSuccMsg: Plan Activated Successfully
     plnActivateErrMsg: Plan Activation Failed
+    planUpdatedSuccessMsg: Plan Updated Successfully
+    planUpdatedErrorMsg: Plan Updation Failed
+    updateAccEmailFileName: Account_Updation_Template.txt
+    updateAccEmailSubject: Your RI IES Account Updated Details
+    editAccSuccessMsg: Account Details Updated Successfully
+    editAccFailureMsg: Account Updation Failed
 server:
   port: 7070
 spring:

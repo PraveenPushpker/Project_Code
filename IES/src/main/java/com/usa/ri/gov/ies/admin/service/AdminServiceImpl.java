@@ -348,16 +348,96 @@ public class AdminServiceImpl implements AdminService {
 
 		return model;
 	}
-
+	
+	
 	@Override
-	public IesPlan findByPlanId(String planId) {
-		IesPlanEntity entity = iesPlnRepository.findById(Integer.parseInt(planId)).get();
+	public boolean updateAccount(AppAccount accModel) {
+		logger.debug(" editAppAccount() started");
+		String encryptedPwd = null;
+		// create AppAccount Entity object
+		AppAccountEntity entity = new AppAccountEntity();
 
+		// convert model object to entity
+		BeanUtils.copyProperties(accModel, entity);
+
+		// convert the password to encrypted password
+		encryptedPwd = PasswordUtils.encrypt(entity.getPassword());
+		entity.setPassword(encryptedPwd);
+		try {
+
+			// call repository method
+			AppAccountEntity appAccEntity = appAccRepository.save(entity);
+
+			String fileName = appProperties.getProperties().get(AppConstants.UPDATE_ACC_EMAIL_FILE_NAME);
+			String mailSub = appProperties.getProperties().get(AppConstants.ACCOUNT_UPDATE_SUBJECT);
+			String mailBody = getEmailBodyContent(accModel, fileName);
+			// sending confirmation mail
+			emailUtils.sendEmail(accModel.getEmail(), mailSub, mailBody);
+			logger.debug("editAppAccount() ended");
+
+			if (appAccEntity.getAccId() !=null)
+				return true;
+		} catch (Exception e) {
+			logger.error("editAppAccount() failed" + e.getMessage());
+		}
+		logger.info("editAppAccount completed Successfull");
+		return false;
+	}
+	
+	
+
+	/**
+	 * This method is used to get Single plan record by ID
+	 */
+	@Override
+	public IesPlan findByPlanId(Integer planId) {
+		logger.debug("findPlanById() method started");
+		
 		IesPlan model = new IesPlan();
-
-		BeanUtils.copyProperties(entity, model);
-
+		
+		try {
+			// Loading PlanDetails Entity
+			IesPlanEntity entity = iesPlnRepository.findById(planId).get();
+			// Setting PlanDetails Entity to Model
+			BeanUtils.copyProperties(entity, model);
+			logger.info("Plan loaded Successfully");
+		} catch (Exception e) {
+			logger.error("Exception Occured in Loading Plan: "+e.getMessage());
+		}
+		
+		logger.debug("findPlanById() method ended");
 		return model;
 	}
+	
+	
+	
+	/**
+	 * This method is used to update plan
+	 */
+	@Override
+	public boolean updatePlan(IesPlan iesPlan) {
+		logger.debug("updatePlan() method started");
+
+		try {
+			// Loading PlanDetails Entity
+			IesPlanEntity entity = iesPlnRepository.findById(iesPlan.getPlanId()).get();
+			
+			// Setting model object to Entity
+			entity.setPlanName(iesPlan.getPlanName());
+			entity.setPlanDesc(iesPlan.getPlanDesc());
+			entity.setStartDate(iesPlan.getStartDate());
+			entity.setEndDate(iesPlan.getEndDate());
+			
+			// calling save method
+			iesPlnRepository.save(entity);
+			return true;
+		} catch (Exception e) {
+			logger.error("Exception Occured in updatePlan(): "+e.getMessage());
+		}
+				
+		logger.debug("updatePlan() method ended");
+		return false;
+	}
+	
 
 }// class

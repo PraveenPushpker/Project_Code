@@ -91,7 +91,7 @@
 	<font color='red'>${failure}</font>
 
 	<h2>Edit Account Details</h2>
-	<form:form action="#" method="POST" modelAttribute="account"
+	<form:form action="editAcc" method="POST" modelAttribute="account"
 		id="accRegForm">
 		<table>
 			<tr>

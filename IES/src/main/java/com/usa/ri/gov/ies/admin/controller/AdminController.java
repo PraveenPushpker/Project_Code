@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.usa.ri.gov.ies.admin.model.AppAccount;
@@ -123,19 +124,7 @@ public class AdminController {
 		String emailId = req.getParameter("email");
 		return adminService.findByEmail(emailId);
 	}
-	
-	
-	@RequestMapping(value = "/editAcc")
-	public String editAccount(HttpServletRequest req, Model model) {
 
-		String accId = req.getParameter("accId");
-
-		AppAccount accModel = adminService.findByAccountId(accId);
-
-		model.addAttribute(AppConstants.APP_ACCOUNT, accModel);
-		initForm(model);
-		return "editAcc";
-}
 	
 
 	/**
@@ -225,8 +214,7 @@ public class AdminController {
 		}
 		return "viewAccounts";
 	}
-	
-	
+
 	@RequestMapping(value = "/iesPlan", method = RequestMethod.GET)
 	public String iesPlanForm(Model model) {
 		logger.debug("AdminController::iesPlanForm() started");
@@ -243,7 +231,7 @@ public class AdminController {
 
 		return "iesPlan";
 	}
-	
+
 	@RequestMapping(value = "/iesPlan", method = RequestMethod.POST)
 	public String plnDtls(@ModelAttribute("iesModel") IesPlan iesplnModal, Model model) {
 		try {
@@ -268,15 +256,13 @@ public class AdminController {
 		}
 		return "iesPlan";
 	}
-	
-	
+
 	@RequestMapping("/iesPlan/validatePlanName")
 	public @ResponseBody String checkPlanNameValidate(HttpServletRequest req, Model model) {
 		String planId = req.getParameter("planName");
 		return adminService.findByPlanName(planId);
 	}
-	
-	
+
 	@RequestMapping(value = "/viewIesPlans")
 	public String viewIesPlans(Model model) {
 		logger.debug("viewIesPlans() method started");
@@ -290,10 +276,7 @@ public class AdminController {
 		logger.debug("viewIesPlans() method ended");
 		return "viewIesPlans"; // view name
 	}
-	
-	
-	
-	
+
 	@RequestMapping(value = "/iesPlndelete")
 	public String deleteIesPlan(HttpServletRequest req, Model model) {
 		logger.info("*** IesPlan Getting De-Activating ***");
@@ -355,21 +338,99 @@ public class AdminController {
 		}
 		return "viewIesPlans";
 	}
-	
-	
-	
-	
-	@RequestMapping(value = "/editIesPln")
-	public String editPlan(HttpServletRequest req, Model model) {
 
-		String planId = req.getParameter("planId");
+	/**
+	 * This method is used to display edit page for plan
+	 * @return
+	 */
+	@RequestMapping("/editPlan")
+	public String displayEditPlan(@RequestParam Integer planId, Model model) {
+		logger.debug("displayEditPlan() method started");
+		
+		// setting model object to model scope
+		model.addAttribute("plan", adminService.findByPlanId(planId));
+		
+		logger.debug("displayEditPlan() method ended");
+		return "editPlan";
+	}
+	
+	@RequestMapping(value = "/editPlan", method = RequestMethod.POST)
+	public String updatePlan(@ModelAttribute("plan") IesPlan iesPlan, Model model) {
+		logger.debug("updatePlan() method started");
+		
+		// call service layer method
+		boolean isUpdated = adminService.updatePlan(iesPlan);
+		
+		if(isUpdated) {
+			// adding success message to model scope if successfully updated
+			model.addAttribute(AppConstants.SUCCESS, appProperties.getProperties().get(AppConstants.PLAN_UPDATED_SUCCESS_MSG));
+		}else{
+			// adding error message to model if updation failed
+			model.addAttribute(AppConstants.FAILURE, appProperties.getProperties().get(AppConstants.PLAN_UPDATED_ERROR_MSG));			
+		}
+		
+		logger.debug("updatePlan() method ended");
+		return "editPlan";
+	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/editAcc")
+	public String editAccountForm(HttpServletRequest req, Model model) {
 
-		IesPlan accModel = adminService.findByPlanId(planId);
+		String accId = req.getParameter("accId");
+
+		AppAccount accModel = adminService.findByAccountId(accId);
 
 		model.addAttribute(AppConstants.APP_ACCOUNT, accModel);
 		initForm(model);
-		return "editIesPln";
-}
+		return "editAcc";
+	}
+	/**
+	 * This method is used for Updating Account Details
+	 * 
+	 * @param planDTLS
+	 * @param model
+	 * @return
+	 */
+
+	@RequestMapping(value = "/editAcc", method = RequestMethod.POST)
+	public String editAccount(@ModelAttribute("account") AppAccount accModel, Model model) {
+		logger.debug("AdminController:: editAccount() method started");
+		boolean status = false;
+		// Invoke Service method
+		status = adminService.updateAccount(accModel);
+
+		if (status) {
+			// get SuccessMessage value
+			String successMsg = appProperties.getProperties().get(AppConstants.EDIT_ACC_SUCCESS_MSG);
+			model.addAttribute(AppConstants.SUCCESS, successMsg);
+		} else {
+			// get Failure Message
+			String failureMsg = appProperties.getProperties().get(AppConstants.EDIT_ACC_ERR_MSG);
+			model.addAttribute(AppConstants.FAILURE, failureMsg);
+		}
+		//add roles Details
+		initForm(model);
+		logger.debug("AdminController:: editAccount() method started");
+		logger.info("editAccount  Method completed Successfully");
+
+		return "editAcc";
+	}
 	
 
+
+
+
+	@RequestMapping(value = "/login")
+	public String loginForm() {
+		return "login";
+	}
+
+	@RequestMapping(value = "/forgotPwd")
+	public String forgotPwdForm() {
+		return "forgotPwd";
+	}
 }
