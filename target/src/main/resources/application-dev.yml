@@ -1,0 +1,80 @@
+#custom messages
+ies:
+  properties:
+    #AppAccounts Details
+    message: Welcome to IES - DEV
+    cwRegSuccess: Registration Successfull
+    cwRegFail: Registration Failed
+    regEmailFileName: Registration_Email_Template.txt
+    regEmailSubject: IES Registration Completed
+    accActivateEmailFileName: Account_Active_Email_Template.txt
+    accActivateEmailSubject: Your RI IES Account Activated
+    accDeActiveEmailFileName: Account_De_Active_Email_Template.txt
+    accDeActiveEmailSubject: Your RI IES Account De-Activated
+    accActivateSuccMsg: Account Activated Successfully
+    accActivateErrMsg: Account Activation Failed
+    accDeActivateSuccMsg: Account De-Activated Successfully
+    accDeActivateErrMsg: Account De-Activation Failed
+    editAccSuccessMsg: Account Details Updated Successfully
+    editAccFailureMsg: Account Updation Failed
+    updateAccEmailFileName: Account_Updation_Template.txt
+    updateAccEmailSubject: Your RI IES Account Updated Details
+    
+    #PlanDetails
+    planRegSuccessMsg: Plan Created Successfully
+    planRegFailureMsg: Plan Creation failed
+   
+    planDeActivateSuccessMsg: Plan De-Activated SuccessFully
+    planDeActivateFailureMsg: Plan De-Activated Failed
+   
+    planActivateSuccessMsg: Plan Activated SuccessFully
+    planActivateFailureMsg: Plan Activation Failed
+   
+    editPlanSuccessMsg: Plan Edited Successfully
+    editPlanFailureMsg: Plan Edition Failed
+   
+    #loggin mail message
+    pwdEmailSentFailureMsg: Email not sent successfully, Try again after some time
+    invalidCredentials: Invalid Credentials
+    #Forgot Password Details
+    emailNotRegistered: This Email-ID not Registered
+    forgotPasswordEmailTemplateFileName: Forgot_Password_Email_Template.txt
+    forgotPasswordEmailSubject: IES Account recovered
+    pwdEmailSentSuccessMsg: Password sent to your email
+    accDeActivatedMsg: Account is not Active, For Any Query Contact IES Admin
+#Port
+server:
+  port: 7070
+#Database connection
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        dialect: org.hibernate.dialect.OracleDialect
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: IES_DEV
+    password: IES_DEV
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+#sending mail
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: JavaProject.02.7am@gmail.com
+    password: JavaProject@123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+#Loggin
+logging:
+  file: IES-App.log
+  level:
+    root: INFO
+    com.usa.ri.gov.ies: DEBUG
